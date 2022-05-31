@@ -16,9 +16,19 @@ struct ProspectsView: View {
         case none, contacted, uncontacted
     }
     
+    // Added for Challenge 16-3
+    enum SortType {
+        case name, date
+    }
+    
     // MARK: - PROPERTIES
     @EnvironmentObject var prospects: Prospects
     @State private var isShowingScanner = false
+    
+    // Added for Challenge 16-3
+    @State private var sortOrder = SortType.date
+    @State private var isShowingSortOptions = false
+    
     let filter: FilterType
     
     // MARK: - COMPUTED PROPERTIES
@@ -34,13 +44,24 @@ struct ProspectsView: View {
     }
     
     var filteredProspects: [Prospect] {
+        // Added for Challenge 16-3
+        let result: [Prospect]
+        
+        // Removed Returns and changed them to result = as part of Challenge 16-3
         switch filter {
         case .none:
-            return prospects.people
+            result = prospects.people
         case .contacted:
-            return prospects.people.filter { $0.isContacted }
+            result = prospects.people.filter { $0.isContacted }
         case .uncontacted:
-            return prospects.people.filter { !$0.isContacted }
+            result = prospects.people.filter { !$0.isContacted }
+        }
+        
+        // Added for Challenge 16-3
+        if sortOrder == .name {
+            return result.sorted { $0.name < $1.name }
+        } else {
+            return result.reversed()
         }
     }
     
@@ -49,11 +70,19 @@ struct ProspectsView: View {
         NavigationView {
             List {
                 ForEach(filteredProspects) { prospect in
-                    VStack(alignment: .leading) {
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
+                    
+                    HStack {
+                        // Added HStack and Image (with modifiers) for challenge 16-1
+                        Image(systemName: prospect.isContacted ? "person.crop.circle.badge.checkmark" : "person.crop.circle.badge.questionmark")
+                            .renderingMode(.original)
+                            .resizable()
+                            .frame(width: 28, height: 28, alignment: .center)
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     .swipeActions {
                         if prospect.isContacted {
@@ -82,14 +111,29 @@ struct ProspectsView: View {
             }
             .navigationTitle(title)
             .toolbar {
-                Button {
-                    isShowingScanner = true
-                } label: {
-                    Label("Scan", systemImage: "qrcode.viewfinder")
+                // Added for Challenge 16-3
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        isShowingSortOptions = true
+                    } label: {
+                        Label("Sort", systemImage: "arrow.up.arrow.down")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isShowingScanner = true
+                    } label: {
+                        Label("Scan", systemImage: "qrcode.viewfinder")
+                    }
                 }
             }
             .sheet(isPresented: $isShowingScanner) {
                 CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: handleScan)
+            }
+            // Added for Challenge 16-3
+            .confirmationDialog("Sort By", isPresented: $isShowingSortOptions) {
+                Button("Name (A-Z)") { sortOrder = .name }
+                Button("Date (Newest First)") { sortOrder = .date }
             }
         }
     }

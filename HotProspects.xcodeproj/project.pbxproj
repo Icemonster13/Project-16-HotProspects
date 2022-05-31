@@ -10,6 +10,7 @@
 		C3673A0D2844ED2000AB7B7B /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3673A0C2844ED2000AB7B7B /* Prospect.swift */; };
 		C3673A112844F5B600AB7B7B /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = C3673A102844F5B600AB7B7B /* CodeScanner */; };
 		C3673A1428454EFF00AB7B7B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3673A1328454EFF00AB7B7B /* ImageSaver.swift */; };
+		C3673A162846CB2B00AB7B7B /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3673A152846CB2B00AB7B7B /* FileManager-DocumentsDirectory.swift */; };
 		C3B11DE32844EA36006DE593 /* HotProspectsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B11DE22844EA36006DE593 /* HotProspectsApp.swift */; };
 		C3B11DE52844EA36006DE593 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B11DE42844EA36006DE593 /* ContentView.swift */; };
 		C3B11DE72844EA37006DE593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3B11DE62844EA37006DE593 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		C3673A0C2844ED2000AB7B7B /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 		C3673A1328454EFF00AB7B7B /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		C3673A152846CB2B00AB7B7B /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 		C3B11DDF2844EA36006DE593 /* HotProspects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotProspects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B11DE22844EA36006DE593 /* HotProspectsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProspectsApp.swift; sourceTree = "<group>"; };
 		C3B11DE42844EA36006DE593 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		C3673A1228454ED000AB7B7B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C3673A152846CB2B00AB7B7B /* FileManager-DocumentsDirectory.swift */,
 				C3673A1328454EFF00AB7B7B /* ImageSaver.swift */,
 			);
 			path = Helpers;
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3B11DF32844EA99006DE593 /* MeView.swift in Sources */,
+				C3673A162846CB2B00AB7B7B /* FileManager-DocumentsDirectory.swift in Sources */,
 				C3673A1428454EFF00AB7B7B /* ImageSaver.swift in Sources */,
 				C3673A0D2844ED2000AB7B7B /* Prospect.swift in Sources */,
 				C3B11DF12844EA8E006DE593 /* ProspectsView.swift in Sources */,

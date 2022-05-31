@@ -14,18 +14,23 @@ class Prospect: Identifiable, Codable {
     var name = "Anonymnous"
     var emailAddress = ""
     fileprivate(set) var isContacted = false
-    
 }
 
 @MainActor class Prospects: ObservableObject {
     
     // MARK: - PROPERTIES
     @Published private(set) var people: [Prospect]
-    let saveKey = "SavedData"
+    //Added for Challenge 16-2
+    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedPlaces")
+    // Removed for Challenge 16-2
+    // let saveKey = "SavedData"
     
     // MARK: - INITIALIZER
     init() {
-        if let data = UserDefaults.standard.data(forKey: saveKey) {
+        // Removed for Challenge 16-2
+        // if let data = UserDefaults.standard.data(forKey: saveKey) { -- Removed for Challenge 16-2
+        // Added for Challenge 16-2
+        if let data = try? Data(contentsOf: savePath) {
             if let decoded = try? JSONDecoder().decode([Prospect].self, from: data) {
                 people = decoded
                 return
@@ -48,7 +53,10 @@ class Prospect: Identifiable, Codable {
     
     private func save() {
         if let encoded = try? JSONEncoder().encode(people) {
-            UserDefaults.standard.set(encoded, forKey: saveKey)
+            // Removed for Challenge 16-2
+            // UserDefaults.standard.set(encoded, forKey: saveKey) -- Removed for Challenge 16-2
+            // Added for Challenge 16-2
+            try? encoded.write(to: savePath, options: [.atomic, .completeFileProtection])
         }
     }
 }
